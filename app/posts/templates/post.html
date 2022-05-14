@@ -27,7 +27,7 @@
 
       <div class="items__item item item--post">
         <div class="item__top">
-          <a href="/user-feed.html" class="item__head">
+          <a href="/users/{{ post.poster_name }}" class="item__head">
             <div class="item__ava-wrap">
               <img src="{{ post.poster_avatar }}" alt="" class="item__ava" width="47">
             </div>
@@ -50,7 +50,7 @@
             <p class="item__comments-counter">{{ count_comments }} комментария</p>
             <div class="item__counter">
               <img src="/static/img/eye.png" alt="" class="item__counter-icon" width="26">
-              <span class="item__counter-text">1024</span>
+              <span class="item__counter-text">{{ post.views_count }}</span>
             </div>
           </div>
 

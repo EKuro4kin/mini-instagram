@@ -2,6 +2,8 @@ import json
 
 class PostsDAO:
 
+    """класс ответственный за посты"""
+
     def __init__(self, path):
         """ При создании экземпляра DAO нужно указать путь к файлу с данными"""
         self.path = path
@@ -29,6 +31,7 @@ class PostsDAO:
     def get_post_by_pk(self, pk):
         """ возвращает один пост по его идентификатору"""
         posts = self.load_data()
+
         for post in posts:
             if post["pk"] == pk:
                 return post
@@ -41,4 +44,3 @@ class PostsDAO:
             if query.lower() in post["content"].lower():
                 posts_founded.append(post)
         return posts_founded
-
