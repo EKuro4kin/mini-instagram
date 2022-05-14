@@ -51,22 +51,24 @@ def post_error(e):
     return "Такой пост не найден", 404
 
 
-# Создаем вьюшку с выводом конкретного поста и комментариями к нему
-@posts_blueprint.route('/search/')
-def page_search_for_posts():
-    # s = request.args.get("s")
-    # posts = posts_dao.get_posts_all()
-    # if s:
-    #     filter_posts = posts_dao.get_search_for_posts(s)
-    #     count_posts = len(filter_posts)
-    #     return render_template("search.html", posts=filter_posts, count_posts=count_posts)
-    return "вы не ввели слово для фильтрации постов"
+# Создаем вьюшку с поиском по маршруту
+@posts_blueprint.route('/search/<query>')
+def page_search_for_posts(query):
+    try:
+        filter_posts_for_query = posts_dao.get_search_for_posts(query)
+        count_posts = len(filter_posts_for_query)
+        return render_template("search.html", posts=filter_posts_for_query, query=query, count_posts=count_posts)
+    except:
+        return "вы не ввели слово для фильтрации постов либо такого слова нет"
 
 # Создаем вьюшку с выводом пользователя по имени
 @posts_blueprint.route('/users/<username>')
 def page_posts_by_user(username):
-    filter_user_posts = posts_dao.get_posts_by_user(username)
-    return render_template("user-feed.html", posts=filter_user_posts)
+    try:
+        filter_user_posts = posts_dao.get_posts_by_user(username)
+        return render_template("user-feed.html", posts=filter_user_posts)
+    except:
+        return "такого пользователя нет"
 
 
 

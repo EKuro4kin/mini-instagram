@@ -15,6 +15,8 @@ class TestPostsDAO:
     def keys_expected(self):
         return {"poster_name", "poster_avatar", "pic", "content", "views_count", "likes_count", "pk"}
 
+    # Получение постов
+
     def test_get_all_check_type(self, posts_dao):
         posts = posts_dao.get_posts_all()
         assert type(posts) == list, "Список постов должен быть списком"
